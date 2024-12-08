@@ -7,6 +7,7 @@ You create a python file in your source tree to configure the makefile.
 Example:
 
 configure.py
+
 ```py 
 from dosbuild import Project
 
