@@ -86,7 +86,6 @@ class Project:
         objs = ""
 
         project_target = "\n{}:\n".format(self.project_name)
-        project_target += "\tmkdir $(BUILD_DIR)/objs\n"
         for source in self.sources:
             obj = "{}.obj ".format('.'.join((source.split("/")[-1]).split('.')[:-1]))
             clean_target += "\tdel {}\n".format(obj)
