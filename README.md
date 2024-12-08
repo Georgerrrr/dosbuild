@@ -1,4 +1,4 @@
-#DOSBUILD
+# DOSBUILD
 
 A really simple build tool for generating makefiles to be used with Borlands C and dosbox.
 
