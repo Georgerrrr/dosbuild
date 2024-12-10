@@ -93,9 +93,9 @@ class Project:
             if source.endswith(".asm"):
                 project_target += "\ttasm -mx $(SOURCE_DIR)/{} -o $(BUILD_DIR)\n".format(source)
             else:
-                project_target += "\tcpp -m{} -I$(SOURCE_DIR)/{} -n$(BUILD_DIR) -c $(SOURCE_DIR)/{}\n".format(self.memory_model, self.include_directory, source)
+                project_target += "\ttcc -m{} -I$(SOURCE_DIR)/{} -n$(BUILD_DIR) -c $(SOURCE_DIR)/{}\n".format(self.memory_model, self.include_directory, source)
         
-        project_target += "\tbcc -m{} -I$(SOURCE_DIR)/{} -e$(PROJECT_NAME) {}\n".format(self.memory_model, self.include_directory, objs)
+        project_target += "\ttcc -m{} -e$(PROJECT_NAME) {}\n".format(self.memory_model, objs)
 
         makefile += project_target + "\n"
         makefile += clean_target 
