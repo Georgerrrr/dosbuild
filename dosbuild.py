@@ -86,14 +86,14 @@ class Project:
         objs = ""
 
         project_target = "\n{}:\n".format(self.project_name)
-        for source in self.sources:
-            obj = "{}.obj ".format('.'.join((source.split("/")[-1]).split('.')[:-1]))
+        for i, source in enumerate(self.sources):
+            obj = "{}.obj ".format(i)
             clean_target += "\tdel {}\n".format(obj)
             objs += obj
             if source.endswith(".asm"):
-                project_target += "\ttasm -mx $(SOURCE_DIR)/{} -o $(BUILD_DIR)\n".format(source)
+                project_target += "\ttasm -mx $(SOURCE_DIR)/{} -o $(BUILD_DIR)/{}.obj\n".format(source, i)
             else:
-                project_target += "\ttcc -m{} -I$(SOURCE_DIR)/{} -n$(BUILD_DIR) -c $(SOURCE_DIR)/{}\n".format(self.memory_model, self.include_directory, source)
+                project_target += "\ttcc -m{} -I$(SOURCE_DIR)/{} -n$(BUILD_DIR) -c -o{}.obj $(SOURCE_DIR)/{}\n".format(self.memory_model, self.include_directory, i, source)
         
         project_target += "\ttcc -m{} -e$(PROJECT_NAME) {}\n".format(self.memory_model, objs)
 
